@@ -1,0 +1,42 @@
+<app-nav></app-nav>
+
+<h2>Click to add markers on the map</h2>
+
+<agm-map 
+  [latitude]="lat" 
+  [longitude]="lng" 
+  (mapClick)="onChooseLocation($event)">
+  <!-- <agm-marker *ngIf="locationChosen" [latitude]="latNew" [longitude]="lngNew" ></agm-marker> -->
+  <agm-marker 
+      *ngFor="let m of markers"
+      [latitude]="m.lat"
+      [longitude]="m.lng">
+      
+    <agm-info-window>
+      <strong>Marker Name</strong>
+    </agm-info-window>
+    
+  </agm-marker>
+</agm-map>
+<div *ngIf="createMapErrors">
+    <p *ngIf="createMapErrors.errors.name" style="color:red">{{createMapErrors.errors.name.message}}</p>
+    <p *ngIf="createMapErrors.errors.quantity" style="color:red">{{createMapErrors.errors.quantity.message}}</p>
+    <p *ngIf="createMapErrors.errors.price" style="color:red">{{createMapErrors.errors.price.message}}</p>
+  </div>
+<form>
+  <input 
+    type="text" 
+    name="name" 
+    [(ngModel)]="newMarkerMap.name" 
+    placeholder="Map name" >
+
+  <input 
+    type="text" 
+    name="description" 
+    [(ngModel)]="newMarkerMap.description" 
+    placeholder="Map description" >
+
+  <input (click)=submitMap() type="submit" value="Create Map">
+</form>
+
+<router-outlet></router-outlet>
