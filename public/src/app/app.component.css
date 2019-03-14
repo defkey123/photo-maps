@@ -4,3 +4,8 @@
 agm-map {
     height: 800px;
 }
+.split {
+    padding: 4%;
+    vertical-align: top;
+    display: inline-block
+}
